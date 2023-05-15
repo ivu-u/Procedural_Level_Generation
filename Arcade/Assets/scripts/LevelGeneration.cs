@@ -29,6 +29,10 @@ public class LevelGeneration : MonoBehaviour
     // for player spawnpoint
     public Transform player;
 
+
+    // boolean to start the generation
+    private bool start = false;
+
     private void Start()
     {
         // generate a random tarting position
@@ -45,14 +49,22 @@ public class LevelGeneration : MonoBehaviour
     //SPAWNING_ROOMS-------------------------------------------------------------------------------
     private void Update()
     {
-        if (timeBtwRoom <= 0 && stopGen == false)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Move();
-            timeBtwRoom = startTimeBtwRoom;
+            start = true;
         }
-        else
+
+        if (start)
         {
-            timeBtwRoom -= Time.deltaTime;
+            if (timeBtwRoom <= 0 && stopGen == false)
+            {
+                Move();
+                timeBtwRoom = startTimeBtwRoom;
+            }
+            else
+            {
+                timeBtwRoom -= Time.deltaTime;
+            }
         }
     }
 
